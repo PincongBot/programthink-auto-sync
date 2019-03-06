@@ -99,6 +99,8 @@ task :deploy do
       sh "cp -r /home/travis/btsync/#{i}/#{i} /home/travis/mirrors/books/"
     end
 
+    puts "files copied"
+
     Dir.chdir("/home/travis/mirrors/blog") { push }
     Dir.chdir("/home/travis/mirrors/books") { push }
 
@@ -128,3 +130,20 @@ task :sync, [:minutes] do |t, args|
   
 end
 
+task :timing-output do
+
+    maxtime = (45 - 1) * 60 + 40
+    n = 0
+
+    while n < maxtime do
+
+      if n % 30 == 0 then
+        puts DateTime.now
+      end
+
+      sleep(1)
+      n += 1
+
+    end
+
+end
