@@ -31,7 +31,13 @@ end
 def push
   date = DateTime.now.strftime("%F")
   sh "git add --all ."
-  sh "git commit -m '#{date}'"
+  
+  files_changed = `git status --short | wc -l`.match(/\d+/)[0].to_i
+  
+  if files_changed > 0
+    sh "git commit -m '#{date}'"
+  end
+
   sh "git push --quiet origin master"
   puts "Pushed updated branch master"
 end
@@ -79,7 +85,7 @@ task :deploy do
     Dir.chdir("/home/travis/mirrors/blog") { clean }
     Dir.chdir("/home/travis/mirrors/books") { clean }
 
-    sh "cp -r /home/travis/btsync/blog/blog/ /home/travis/mirrors/blog/"
+    sh "cp -r /home/travis/btsync/blog/blog/* /home/travis/mirrors/blog/"
 
     Dir.chdir("/home/travis/mirrors/blog") { push }
     Dir.chdir("/home/travis/mirrors/books") { push }
