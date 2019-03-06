@@ -13,7 +13,7 @@ cache:
   bundler: true
   directories:
     - $HOME/btsync/
-    - $TRAVIS_BUILD_DIR/repo/
+    - $HOME/mirrors/
 
 install:
   - wget https://download-cdn.resilio.com/stable/linux-x64/resilio-sync_x64.tar.gz -O /tmp/btsync.tar.gz
