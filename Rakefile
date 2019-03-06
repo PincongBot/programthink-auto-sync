@@ -130,7 +130,7 @@ task :sync, [:minutes] do |t, args|
   
 end
 
-task :timing-output do
+task :timing_output do
 
     maxtime = (45 - 1) * 60 + 40
     n = 0
