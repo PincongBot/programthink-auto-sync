@@ -138,6 +138,7 @@ task :timing_output do
     while n < maxtime do
 
       if n % 30 == 0 then
+        puts ""
         puts DateTime.now
       end
 
