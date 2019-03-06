@@ -82,7 +82,7 @@ task :sync, [:minutes] do |t, args|
 
       if i % 30 == 0 then
         puts ""
-        sh "du -h -s programthink/books/*"
+        sh "du -h -s /home/travis/btsync/*"
       end
 
       sleep(1)
