@@ -4,6 +4,8 @@ require 'date'
 GIT_NAME = "program-think-mirrors"
 GIT_EMAIL = "program-think-mirrors@github.com"
 
+BOOK_TYPES = [ "政治", "心理学", "历史", "经济", "管理", "社会学", "文艺", "哲学", "军事", "IT" ]
+
 def check_destination_blog
   if Dir.exist? "/home/travis/mirrors/blog"
     Dir.chdir("/home/travis/mirrors/blog") { sh "git pull" }
@@ -60,6 +62,12 @@ task :init do
       sh "mkdir /home/travis/btsync/books/"
     end
 
+    BOOK_TYPES.each do |i|
+      unless Dir.exist? "/home/travis/btsync/books/#{i}/"
+        sh "mkdir /home/travis/btsync/books/#{i}/"
+      end
+    end
+
 end
 
 task :deploy do
@@ -86,6 +94,10 @@ task :deploy do
     Dir.chdir("/home/travis/mirrors/books") { clean }
 
     sh "cp -r /home/travis/btsync/blog/blog/* /home/travis/mirrors/blog/"
+
+    BOOK_TYPES.each do |i|
+      sh "cp -r /home/travis/btsync/#{i}/#{i} /home/travis/mirrors/books/"
+    end
 
     Dir.chdir("/home/travis/mirrors/blog") { push }
     Dir.chdir("/home/travis/mirrors/books") { push }
