@@ -4,7 +4,7 @@ require 'date'
 GIT_NAME = "program-think-mirrors"
 GIT_EMAIL = "program-think-mirrors@github.com"
 
-BOOK_TYPES = [ "政治", "心理学", "历史", "经济", "管理", "社会学", "文艺", "哲学", "军事", "IT" ]
+BOOK_TYPES = [ "政治" ]
 
 def check_destination_blog
   if Dir.exist? "/home/travis/mirrors/blog"
@@ -56,16 +56,6 @@ task :init do
 
     unless Dir.exist? "/home/travis/btsync/blog/"
       sh "mkdir /home/travis/btsync/blog/"
-    end
-
-    unless Dir.exist? "/home/travis/btsync/books/"
-      sh "mkdir /home/travis/btsync/books/"
-    end
-
-    BOOK_TYPES.each do |i|
-      unless Dir.exist? "/home/travis/btsync/books/#{i}/"
-        sh "mkdir /home/travis/btsync/books/#{i}/"
-      end
     end
 
 end
