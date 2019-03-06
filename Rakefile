@@ -4,7 +4,7 @@ require 'date'
 GIT_NAME = "program-think-mirrors"
 GIT_EMAIL = "program-think-mirrors@github.com"
 
-BOOK_TYPES = [ "政治" ]
+BOOK_TYPES = [ "政治", "心理学", "历史", "经济", "管理", "社会学", "文艺", "哲学", "军事", "IT" ]
 
 def check_destination_blog
   if Dir.exist? "/home/travis/mirrors/blog"
@@ -80,13 +80,15 @@ task :deploy do
     check_destination_books
 
     # clean
-    Dir.chdir("/home/travis/mirrors/blog") { clean }
-    Dir.chdir("/home/travis/mirrors/books") { clean }
+    # Dir.chdir("/home/travis/mirrors/blog") { clean }
+    # Dir.chdir("/home/travis/mirrors/books") { clean }
 
-    sh "cp -r /home/travis/btsync/blog/blog/* /home/travis/mirrors/blog/"
+    sh "cp -u -r /home/travis/btsync/blog/blog/* /home/travis/mirrors/blog/"
 
     BOOK_TYPES.each do |i|
-      sh "cp -r /home/travis/btsync/#{i}/#{i} /home/travis/mirrors/books/"
+      if Dir.exist? "/home/travis/btsync/#{i}"
+        sh "cp -u -r /home/travis/btsync/#{i}/#{i} /home/travis/mirrors/books/"
+      end
     end
 
     puts "files copied"
