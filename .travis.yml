@@ -22,6 +22,7 @@ install:
   - bundle install
 
 before_script:
+  - bundle exec rake init --quiet
   - rslsync --config btsync.conf.json
   - pwd
 

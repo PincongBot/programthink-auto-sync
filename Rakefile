@@ -15,6 +15,18 @@ def check_destination
   end
 end
 
+task :init do
+
+    unless Dir.exist? "/home/travis/btsync/"
+      sh "mkdir /home/travis/btsync/"
+    end
+
+    unless Dir.exist? "/home/travis/btsync/blog/"
+      sh "mkdir /home/travis/btsync/blog/"
+    end
+
+end
+
 task :deploy do
 
     # Detect pull request
