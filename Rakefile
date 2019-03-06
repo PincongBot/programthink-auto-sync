@@ -21,6 +21,10 @@ task :init do
       sh "mkdir /home/travis/btsync/"
     end
 
+    unless Dir.exist? "/home/travis/btsync/.sync/"
+      sh "mkdir /home/travis/btsync/.sync/"
+    end
+
     unless Dir.exist? "/home/travis/btsync/blog/"
       sh "mkdir /home/travis/btsync/blog/"
     end
