@@ -12,6 +12,30 @@ def check_destination_blog
   end
 end
 
+def check_destination_books
+  if Dir.exist? "/home/travis/mirrors/books"
+    Dir.chdir("/home/travis/mirrors/books") { sh "git pull" }
+  else
+    sh "git clone git@github.com:program-think-mirrors/books.git /home/travis/mirrors/books"
+  end
+end
+
+def clean
+  if `ls | wc -l`.match(/\d+/)[0].to_i > 0
+    puts "\ncleaning"
+    files = `git rm -rf . | wc -l`.match(/\d+/)[0]
+    puts "#{files} files cleaned\n"
+  end
+end
+
+def push
+  date = DateTime.now.strftime("%F")
+  sh "git add --all ."
+  sh "git commit -m '#{date}'"
+  sh "git push --quiet origin master"
+  puts "Pushed updated branch master"
+end
+
 task :init do
 
     unless Dir.exist? "/home/travis/btsync/"
@@ -24,6 +48,10 @@ task :init do
 
     unless Dir.exist? "/home/travis/btsync/blog/"
       sh "mkdir /home/travis/btsync/blog/"
+    end
+
+    unless Dir.exist? "/home/travis/btsync/books/"
+      sh "mkdir /home/travis/btsync/books/"
     end
 
 end
@@ -45,25 +73,16 @@ task :deploy do
 
     # Make sure destination folder exists as git repo
     check_destination_blog
+    check_destination_books
 
     # clean
-    Dir.chdir("/home/travis/mirrors/blog") { 
-      if `ls | wc -l`.match(/\d+/)[0].to_i > 0
-        puts "\ncleaning"
-        files = `git rm -rf . | wc -l`.match(/\d+/)[0]
-        puts "#{files} files cleaned\n"
-      end
-    }
+    Dir.chdir("/home/travis/mirrors/blog") { clean }
+    Dir.chdir("/home/travis/mirrors/books") { clean }
 
-    sh "cp /home/travis/btsync/blog/blog/ /home/travis/mirrors/blog/"
+    sh "cp -r /home/travis/btsync/blog/blog/ /home/travis/mirrors/blog/"
 
-    Dir.chdir("/home/travis/mirrors/blog/") do
-      date = DateTime.now.strftime("%F")
-      sh "git add --all ."
-      sh "git commit -m '#{date}'"
-      sh "git push --quiet origin master"
-      puts "Pushed updated branch master to GitHub Pages"
-    end
+    Dir.chdir("/home/travis/mirrors/blog") { push }
+    Dir.chdir("/home/travis/mirrors/books") { push }
 
 end
 
