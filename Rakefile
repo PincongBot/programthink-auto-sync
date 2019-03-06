@@ -33,6 +33,15 @@ task :deploy do
     # Make sure destination folder exists as git repo
     check_destination
 
+    # clean
+    Dir.chdir("repo") { 
+      puts "\ncleaning"
+      files = `git rm -rf . | wc -l`.match(/\d+/)[0]
+      puts "#{files} files cleaned\n"
+    }
+
+    sh "cp /home/travis/btsync/blog/ repo"
+
     Dir.chdir("repo") do
       date = DateTime.now.strftime("%F")
       sh "git add --all ."

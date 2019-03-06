@@ -8,24 +8,24 @@
     "upload_limit": 0,
     "shared_folders": [
         {
-            "secret": "MY_SECRET_1", // required field - use --generate-secret in command line to create new secret
-            "dir": "/home/travis/btsync/", // * required field
+            "secret": "B7P64IMWOCXWEYOXIMBX6HN5MHEULFS4V", // required field - use --generate-secret in command line to create new secret
+            "dir": "/home/travis/btsync/blog/", // * required field
             "use_relay_server": true, //  use relay server when direct connection fails
             "use_tracker": true,
             "search_lan": true,
             "use_sync_trash": true, // enable SyncArchive to store files deleted on remote devices
             "overwrite_changes": true, // restore modified files to original version, ONLY for Read-Only folders
             "selective_sync": false // add folder in selective sync mode
-        },
-        {
-            "secret": "MY_SECRET_1",
-            "dir": "/home/travis/btsync/",
-            "use_relay_server": true,
-            "use_tracker": true,
-            "search_lan": true,
-            "use_sync_trash": true,
-            "overwrite_changes": true,
-            "selective_sync": false
-        },
+        }
+        // {
+        //     "secret": "MY_SECRET_1",
+        //     "dir": "/home/travis/btsync/",
+        //     "use_relay_server": true,
+        //     "use_tracker": true,
+        //     "search_lan": true,
+        //     "use_sync_trash": true,
+        //     "overwrite_changes": true,
+        //     "selective_sync": false
+        // },
     ]
 }
