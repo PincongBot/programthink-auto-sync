@@ -9,11 +9,10 @@ branches:
   - master
 
 cache:
-  timeout: 10000
+  timeout: 1000
   bundler: true
   directories:
     - $HOME/btsync/
-    - $HOME/mirrors/
 
 install:
   - wget https://download-cdn.resilio.com/stable/linux-x64/resilio-sync_x64.tar.gz -O /tmp/btsync.tar.gz
@@ -29,3 +28,4 @@ script:
   - bundle exec rake timing_output --quiet &
   - bundle exec rake sync[10] --quiet
   - bundle exec rake deploy --quiet
+  - pkill -f "rslsync"
