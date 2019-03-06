@@ -25,7 +25,7 @@ before_script:
   - bundle exec rake init --quiet
   - rslsync --config btsync.conf.json
 
-script: bundle exec rake sync[30] --quiet
+script: bundle exec rake sync[5] --quiet
 
 after_success:
   - bundle exec rake deploy --quiet

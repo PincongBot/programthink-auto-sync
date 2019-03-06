@@ -56,7 +56,7 @@ task :deploy do
       puts "#{files} files cleaned\n"
     }
 
-    sh "cp /home/travis/btsync/blog/ repo"
+    sh "cp /home/travis/btsync/blog/blog/ repo"
 
     Dir.chdir("repo") do
       date = DateTime.now.strftime("%F")
