@@ -15,7 +15,9 @@ cache:
     - $HOME/btsync/
 
 before_install:
+  - eval "$(ssh-agent -s)"
   - openssl aes-256-cbc -K $encrypted_778da39d87f8_key -iv $encrypted_778da39d87f8_iv -in id_rsa.enc -out $HOME/.ssh/id_rsa -d
+  - chmod 600 $HOME/.ssh/id_rsa
   - ssh-add $HOME/.ssh/id_rsa
 
 install:
