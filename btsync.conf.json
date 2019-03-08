@@ -28,28 +28,8 @@
             "selective_sync": false
         },
         {
-            "secret": "BNZ6DOA6W577O6GUNH7C3MY6DWC6FTDQB",
-            "dir": "/home/travis/btsync/心理学/",
-            "use_relay_server": true,
-            "use_tracker": true,
-            "search_lan": true,
-            "use_sync_trash": true,
-            "overwrite_changes": true,
-            "selective_sync": false
-        },
-        {
             "secret": "BSH7FXJFVWJTKWGSX5GTWX7PHZZ2D2M7Q",
             "dir": "/home/travis/btsync/历史/",
-            "use_relay_server": true,
-            "use_tracker": true,
-            "search_lan": true,
-            "use_sync_trash": true,
-            "overwrite_changes": true,
-            "selective_sync": false
-        },
-        {
-            "secret": "B2FRYA6AXCDW6CF4YJVFWKH2HAXOFICOX",
-            "dir": "/home/travis/btsync/经济/",
             "use_relay_server": true,
             "use_tracker": true,
             "search_lan": true,
