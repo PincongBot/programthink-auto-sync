@@ -36,36 +36,6 @@
             "use_sync_trash": true,
             "overwrite_changes": true,
             "selective_sync": false
-        },
-        {
-            "secret": "B3WNBTAAFFAODFR6FQ3E3L5BBSJAFNBSJ",
-            "dir": "/home/travis/btsync/管理/",
-            "use_relay_server": true,
-            "use_tracker": true,
-            "search_lan": true,
-            "use_sync_trash": true,
-            "overwrite_changes": true,
-            "selective_sync": false
-        },
-        {
-            "secret": "BZR4TTYHT25QWUIE6YNMAKWUGBHKSGLC6",
-            "dir": "/home/travis/btsync/社会学/",
-            "use_relay_server": true,
-            "use_tracker": true,
-            "search_lan": true,
-            "use_sync_trash": true,
-            "overwrite_changes": true,
-            "selective_sync": false
-        },
-        {
-            "secret": "BMBB5YLBIJJAE5H6TP27OS7YCEUKCYHZK",
-            "dir": "/home/travis/btsync/文艺/",
-            "use_relay_server": true,
-            "use_tracker": true,
-            "search_lan": true,
-            "use_sync_trash": true,
-            "overwrite_changes": true,
-            "selective_sync": false
         }
     ]
 }
