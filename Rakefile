@@ -4,7 +4,7 @@ require 'date'
 GIT_NAME = "program-think-mirrors"
 GIT_EMAIL = "program-think-mirrors@github.com"
 
-BOOK_TYPES = [ "政治", "心理学", "历史", "经济", "管理", "社会学", "文艺", "哲学", "军事", "IT" ]
+BOOK_TYPES = [ "政治", "心理学", "历史", "经济", "哲学", "军事", "IT" ]
 
 def check_destination_blog
   if Dir.exist? "/home/travis/mirrors/blog"
@@ -44,6 +44,25 @@ def push
   puts "Pushed updated branch master"
 end
 
+def timing_output
+  puts "\ntiming_output"
+
+  maxtime = (45 - 1) * 60 + 40
+  n = 0
+
+  while n < maxtime do
+
+    if n % 30 == 0 then
+      puts ""
+      puts DateTime.now
+    end
+
+    sleep(1)
+    n += 1
+
+  end
+end
+
 task :init do
 
     unless Dir.exist? "/home/travis/btsync/"
@@ -61,6 +80,10 @@ task :init do
 end
 
 task :deploy do
+
+    fork do
+      timing_output
+    end
 
     # Detect pull request
     if ENV['TRAVIS_PULL_REQUEST'].to_s.to_i > 0
@@ -100,6 +123,10 @@ end
 
 task :sync, [:minutes] do |t, args|
 
+    fork do
+      timing_output
+    end
+
     args.with_defaults(:minutes => 10)
     minutes = args.minutes.to_i
 
@@ -124,19 +151,6 @@ end
 
 task :timing_output do
 
-    maxtime = (45 - 1) * 60 + 40
-    n = 0
-
-    while n < maxtime do
-
-      if n % 30 == 0 then
-        puts ""
-        puts DateTime.now
-      end
-
-      sleep(1)
-      n += 1
-
-    end
+    timing_output
 
 end
