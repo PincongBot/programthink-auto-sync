@@ -106,6 +106,16 @@
             "use_sync_trash": true,
             "overwrite_changes": true,
             "selective_sync": false
+        },
+        {
+            "secret": "BUPSDXFA3TP7KCMLHALRHLIX2FEJEUJFE",
+            "dir": "/home/travis/btsync/IT/",
+            "use_relay_server": true,
+            "use_tracker": true,
+            "search_lan": true,
+            "use_sync_trash": true,
+            "overwrite_changes": true,
+            "selective_sync": false
         }
     ]
 }
