@@ -12,7 +12,7 @@ cache:
   timeout: 1000
   bundler: true
   directories:
-    - $HOME/btsync/
+    - $HOME/zip/
 
 before_install:
   - eval "$(ssh-agent -s)"
@@ -28,11 +28,14 @@ install:
 
 before_script:
   - bundle exec rake init --quiet
-  # - rslsync --config btsync.conf.json
+  - rslsync --config btsync.conf.json
 
 script:
   - bundle exec rake timing_output --quiet &
-  # - bundle exec rake sync[10] --quiet
-  - bundle exec rake sync[30] --quiet &
-  - bundle exec rake deploy --quiet
-  # - pkill -f "rslsync"
+  - bundle exec rake sync[20] --quiet
+  # - bundle exec rake sync[30] --quiet &
+  # - bundle exec rake deploy --quiet
+  - pkill -f "rslsync"
+
+before_cache:
+  - zip -r $HOME/zip/btsync.zip $HOME/btsync

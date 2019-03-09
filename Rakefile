@@ -10,7 +10,7 @@ def check_destination_blog
   if Dir.exist? "/home/travis/mirrors/blog"
     Dir.chdir("/home/travis/mirrors/blog") { sh "git pull" }
   else
-    sh "git clone git@github.com:program-think-mirrors/blog.git /home/travis/mirrors/blog"
+    sh "git clone --depth=1 git@github.com:program-think-mirrors/blog.git /home/travis/mirrors/blog"
   end
 end
 
@@ -18,7 +18,7 @@ def check_destination_books
   if Dir.exist? "/home/travis/mirrors/books"
     Dir.chdir("/home/travis/mirrors/books") { sh "git pull" }
   else
-    sh "git clone git@github.com:program-think-mirrors/books.git /home/travis/mirrors/books"
+    sh "git clone --depth=1 git@github.com:program-think-mirrors/books.git /home/travis/mirrors/books"
   end
 end
 
@@ -64,6 +64,12 @@ def timing_output
 end
 
 task :init do
+
+    if File.exist? "/home/travis/zip/btsync.zip"
+      Dir.chdir("/home/travis/") do
+        sh "unzip /home/travis/zip/btsync.zip"
+      end
+    end
 
     unless Dir.exist? "/home/travis/btsync/"
       sh "mkdir /home/travis/btsync/"
