@@ -18,16 +18,6 @@
             "selective_sync": false // add folder in selective sync mode
         },
         {
-            "secret": "BRSSYZTSAC6UGYTUOJ22L4GCO7QESPPBD",
-            "dir": "/home/travis/btsync/政治/",
-            "use_relay_server": true,
-            "use_tracker": true,
-            "search_lan": true,
-            "use_sync_trash": true,
-            "overwrite_changes": true,
-            "selective_sync": false
-        },
-        {
             "secret": "BNZ6DOA6W577O6GUNH7C3MY6DWC6FTDQB",
             "dir": "/home/travis/btsync/心理学/",
             "use_relay_server": true,
