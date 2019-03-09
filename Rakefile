@@ -68,6 +68,7 @@ task :init do
     if File.exist? "/home/travis/zip/btsync.zip"
       Dir.chdir("/") do
         sh "sudo unzip /home/travis/zip/btsync.zip"
+        sh "sudo chown -R travis:travis /home/travis/btsync/"
       end
     end
 
