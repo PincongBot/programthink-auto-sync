@@ -88,10 +88,6 @@ end
 
 task :deploy do
 
-    fork do
-      timing_output
-    end
-
     # Detect pull request
     if ENV['TRAVIS_PULL_REQUEST'].to_s.to_i > 0
       puts 'Pull request detected.'
@@ -105,39 +101,33 @@ task :deploy do
       sh "git config --global push.default simple"
     end
 
-    # Make sure destination folder exists as git repo
-    check_destination_blog
-    check_destination_books
-
-    # clean
-    # Dir.chdir("/home/travis/mirrors/blog") { clean }
-    # Dir.chdir("/home/travis/mirrors/books") { clean }
-
-    sh "cp -u -r /home/travis/btsync/blog/blog/* /home/travis/mirrors/blog/"
-
-    BOOK_TYPES.each do |i|
-      if Dir.exist? "/home/travis/btsync/#{i}"
-        sh "cp -u -r /home/travis/btsync/#{i}/#{i} /home/travis/mirrors/books/"
-      end
+    # blog
+    fork do
+      check_destination_blog
+      sh "cp -u -r /home/travis/btsync/blog/blog/* /home/travis/mirrors/blog/"
+      puts "files copied"
+      Dir.chdir("/home/travis/mirrors/blog") { push }
     end
 
-    # unless Dir.exist? "/home/travis/mirrors/books/IT"
-    #   sh "mkdir /home/travis/mirrors/books/IT"
-    # end
-    # sh "cp -u -r /home/travis/btsync/IT/IT/软件开发 /home/travis/mirrors/books/IT/"
+    # books
+    fork do
+      check_destination_books
 
-    puts "files copied"
+      BOOK_TYPES.each do |i|
+        if Dir.exist? "/home/travis/btsync/#{i}"
+          sh "cp -u -r /home/travis/btsync/#{i}/#{i} /home/travis/mirrors/books/"
+        end
+      end
+      puts "files copied"
+      
+      Dir.chdir("/home/travis/mirrors/books") { push }
+    end
 
-    Dir.chdir("/home/travis/mirrors/blog") { push }
-    Dir.chdir("/home/travis/mirrors/books") { push }
+    Process.waitall
 
 end
 
 task :sync, [:minutes] do |t, args|
-
-    fork do
-      timing_output
-    end
 
     args.with_defaults(:minutes => 10)
     minutes = args.minutes.to_i
