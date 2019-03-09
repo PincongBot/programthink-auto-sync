@@ -66,8 +66,8 @@ end
 task :init do
 
     if File.exist? "/home/travis/zip/btsync.zip"
-      Dir.chdir("/home/travis/") do
-        sh "unzip /home/travis/zip/btsync.zip"
+      Dir.chdir("/") do
+        sh "sudo unzip /home/travis/zip/btsync.zip"
       end
     end
 
