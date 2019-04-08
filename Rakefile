@@ -4,21 +4,11 @@ require 'date'
 GIT_NAME = "program-think-mirrors"
 GIT_EMAIL = "program-think-mirrors@github.com"
 
-BOOK_TYPES = [ "政治", "心理学", "历史", "经济", "管理", "社会学", "文艺", "哲学", "军事", "IT" ]
-
 def check_destination_blog
   if Dir.exist? "/home/travis/mirrors/blog"
     Dir.chdir("/home/travis/mirrors/blog") { sh "git pull" }
   else
     sh "git clone --depth=1 git@github.com:program-think-mirrors/blog.git /home/travis/mirrors/blog"
-  end
-end
-
-def check_destination_books
-  if Dir.exist? "/home/travis/mirrors/books"
-    Dir.chdir("/home/travis/mirrors/books") { sh "git pull" }
-  else
-    sh "git clone --depth=1 git@github.com:program-think-mirrors/books.git /home/travis/mirrors/books"
   end
 end
 
@@ -107,20 +97,6 @@ task :deploy do
       sh "cp -u -r /home/travis/btsync/blog/blog/* /home/travis/mirrors/blog/"
       puts "files copied"
       Dir.chdir("/home/travis/mirrors/blog") { push }
-    end
-
-    # books
-    fork do
-      check_destination_books
-
-      BOOK_TYPES.each do |i|
-        if Dir.exist? "/home/travis/btsync/#{i}"
-          sh "cp -u -r /home/travis/btsync/#{i}/#{i} /home/travis/mirrors/books/"
-        end
-      end
-      puts "files copied"
-      
-      Dir.chdir("/home/travis/mirrors/books") { push }
     end
 
     Process.waitall
