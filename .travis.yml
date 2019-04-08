@@ -28,7 +28,7 @@ before_script:
 
 script:
   - bundle exec rake timing_output --quiet &
-  # - bundle exec rake sync[5] --quiet
+  - bundle exec rake sync[5] --quiet
   - bundle exec rake sync[30] --quiet &
   - bundle exec rake deploy --quiet
   - pkill -f "rslsync"
