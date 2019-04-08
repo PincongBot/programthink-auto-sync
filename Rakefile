@@ -93,21 +93,16 @@ task :deploy do
       sh "git config --global push.default simple"
     end
 
-    # books
-    fork do
-      check_destination_books
+    check_destination_books
 
-      BOOK_TYPES.each do |i|
-        if Dir.exist? "/home/travis/btsync/#{i}"
-          sh "cp -u -r /home/travis/btsync/#{i}/#{i} /home/travis/mirrors/books/"
-        end
+    BOOK_TYPES.each do |i|
+      if Dir.exist? "/home/travis/btsync/#{i}"
+        sh "cp -u -r /home/travis/btsync/#{i}/#{i} /home/travis/mirrors/books/"
       end
-      puts "files copied"
-      
-      Dir.chdir("/home/travis/mirrors/books") { push }
     end
-
-    Process.waitall
+    puts "files copied"
+    
+    Dir.chdir("/home/travis/mirrors/books") { push }
 
 end
 
