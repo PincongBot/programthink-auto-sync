@@ -4,10 +4,6 @@ language: ruby
 git:
   depth: 1
 
-branches:
-  only:
-  - master
-
 cache:
   timeout: 1000
   bundler: true

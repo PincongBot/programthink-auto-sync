@@ -6,14 +6,6 @@ GIT_EMAIL = "program-think-mirrors@github.com"
 
 BOOK_TYPES = [ "政治", "心理学", "历史", "经济", "管理", "社会学", "文艺", "哲学", "军事", "IT" ]
 
-def check_destination_blog
-  if Dir.exist? "/home/travis/mirrors/blog"
-    Dir.chdir("/home/travis/mirrors/blog") { sh "git pull" }
-  else
-    sh "git clone --depth=1 git@github.com:program-think-mirrors/blog.git /home/travis/mirrors/blog"
-  end
-end
-
 def check_destination_books
   if Dir.exist? "/home/travis/mirrors/books"
     Dir.chdir("/home/travis/mirrors/books") { sh "git pull" }
@@ -99,14 +91,6 @@ task :deploy do
       sh "git config --global user.name '#{GIT_NAME}'"
       sh "git config --global user.email '#{GIT_EMAIL}'"
       sh "git config --global push.default simple"
-    end
-
-    # blog
-    fork do
-      check_destination_blog
-      sh "cp -u -r /home/travis/btsync/blog/blog/* /home/travis/mirrors/blog/"
-      puts "files copied"
-      Dir.chdir("/home/travis/mirrors/blog") { push }
     end
 
     # books
