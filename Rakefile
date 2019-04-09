@@ -7,11 +7,10 @@ GIT_EMAIL = "program-think-mirrors@github.com"
 BOOK_TYPES = [ "政治", "心理学", "历史", "经济", "管理", "社会学", "文艺", "哲学", "军事", "IT" ]
 
 def check_destination_books
-  if Dir.exist? "/home/travis/mirrors/books"
-    Dir.chdir("/home/travis/mirrors/books") { sh "git pull" }
-  else
+  unless Dir.exist? "/home/travis/mirrors/books"
     sh "git clone --depth=1 git@github.com:program-think-mirrors/books.git /home/travis/mirrors/books"
   end
+  Dir.chdir("/home/travis/mirrors/books") { sh "git pull" }
 end
 
 def clean
