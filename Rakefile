@@ -91,15 +91,10 @@ task :deploy do
       sh "git config --global push.default simple"
     end
 
-    # blog
-    fork do
-      check_destination_blog
-      sh "cp -u -r /home/travis/btsync/blog/blog/* /home/travis/mirrors/blog/"
-      puts "files copied"
-      Dir.chdir("/home/travis/mirrors/blog") { push }
-    end
-
-    Process.waitall
+    check_destination_blog
+    sh "cp -r /home/travis/btsync/blog/blog/* /home/travis/mirrors/blog/"
+    puts "files copied"
+    Dir.chdir("/home/travis/mirrors/blog") { push }
 
 end
 
