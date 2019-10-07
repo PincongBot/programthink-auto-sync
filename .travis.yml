@@ -9,7 +9,6 @@ branches:
     - master
 
 cache:
-  timeout: 1000
   bundler: true
   directories:
     - $HOME/zip/
