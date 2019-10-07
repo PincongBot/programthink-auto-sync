@@ -101,7 +101,10 @@ task :deploy do
     end
     puts "files copied"
     
-    Dir.chdir("/home/travis/mirrors/books") { push }
+    Dir.chdir("/home/travis/mirrors/books") do
+      sh "rm '经济/经济学/教材/斯蒂芬·威廉森：宏观经济学 (第3版 扫描版).pdf'" # exceeds GitHub's file size limit of 100.00 MB
+      push
+    end
 
 end
 
