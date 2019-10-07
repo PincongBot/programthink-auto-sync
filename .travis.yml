@@ -38,3 +38,4 @@ script:
 
 before_cache:
   - zip -u -r $HOME/zip/btsync.zip $HOME/btsync
+  
