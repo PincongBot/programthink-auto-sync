@@ -4,11 +4,11 @@ require 'date'
 GIT_NAME = "program-think-mirrors"
 GIT_EMAIL = "program-think-mirrors@github.com"
 
-def check_destination_blog
-  if Dir.exist? "/home/travis/mirrors/blog"
-    Dir.chdir("/home/travis/mirrors/blog") { sh "git pull" }
+def check_destination_gfw
+  if Dir.exist? "/home/travis/mirrors/gfw"
+    Dir.chdir("/home/travis/mirrors/gfw") { sh "git pull" }
   else
-    sh "git clone --depth=1 git@github.com:program-think-mirrors/blog.git /home/travis/mirrors/blog"
+    sh "git clone --depth=1 git@github.com:program-think-mirrors/gfw.git /home/travis/mirrors/gfw"
   end
 end
 
@@ -70,8 +70,8 @@ task :init do
       sh "mkdir /home/travis/btsync/.sync/"
     end
 
-    unless Dir.exist? "/home/travis/btsync/blog/"
-      sh "mkdir /home/travis/btsync/blog/"
+    unless Dir.exist? "/home/travis/btsync/gfw/"
+      sh "mkdir /home/travis/btsync/gfw/"
     end
 
 end
@@ -91,10 +91,10 @@ task :deploy do
       sh "git config --global push.default simple"
     end
 
-    check_destination_blog
-    sh "cp -r /home/travis/btsync/blog/blog/* /home/travis/mirrors/blog/"
+    check_destination_gfw
+    sh "cp -r /home/travis/btsync/gfw/* /home/travis/mirrors/gfw/"
     puts "files copied"
-    Dir.chdir("/home/travis/mirrors/blog") { push }
+    Dir.chdir("/home/travis/mirrors/gfw") { push }
 
 end
 

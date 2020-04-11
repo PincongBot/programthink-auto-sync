@@ -8,8 +8,8 @@
     "upload_limit": 0,
     "shared_folders": [
         {
-            "secret": "B7P64IMWOCXWEYOXIMBX6HN5MHEULFS4V", // required field - use --generate-secret in command line to create new secret
-            "dir": "/home/travis/btsync/blog/", // * required field
+            "secret": "BTLZ4A4UD3PEWKPLLWEOKH3W7OQJKFPLG", // required field - use --generate-secret in command line to create new secret
+            "dir": "/home/travis/btsync/gfw/", // * required field
             "use_relay_server": true, //  use relay server when direct connection fails
             "use_tracker": true,
             "search_lan": true,
