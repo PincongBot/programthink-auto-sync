@@ -96,7 +96,8 @@ task :deploy do
 
     BOOK_TYPES.each do |i|
       if Dir.exist? "/home/travis/btsync/#{i}"
-        sh "cp -u -r /home/travis/btsync/#{i}/#{i} /home/travis/mirrors/books/"
+        sh "rm -rf /home/travis/mirrors/books/#{i}"
+        sh "cp -r /home/travis/btsync/#{i}/#{i} /home/travis/mirrors/books/"
       end
     end
     puts "files copied"
