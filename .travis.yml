@@ -29,8 +29,7 @@ before_script:
   - rslsync --config btsync.conf.json
 
 script:
-  - bundle exec rake timing_output --quiet &
-  - bundle exec rake sync[15] --quiet
-  - bundle exec rake sync[30] --quiet &
-  - bundle exec rake deploy --quiet
+  - bundle exec rake pull --quiet &
+  - bundle exec rake sync[40] --quiet
   - pkill -f "rslsync"
+  - bundle exec rake deploy --quiet
