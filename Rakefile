@@ -34,22 +34,22 @@ task :deploy do
 
     BOOK_TYPES.each do |i|
       if Dir.exist? "/home/runner/btsync/#{i}"
-        sh "rm -rf /home/runner/mirrors/books/#{i}"
-        sh "cp -r /home/runner/btsync/#{i}/#{i} /home/runner/mirrors/books/"
+        sh "rm -rf #{ENV["GITHUB_WORKSPACE"]}/books/#{i}"
+        sh "cp -r /home/runner/btsync/#{i}/#{i} #{ENV["GITHUB_WORKSPACE"]}/books/"
       end
     end
     puts "files copied"
     
-    Dir.chdir("/home/runner/mirrors/books") do
+    Dir.chdir("#{ENV["GITHUB_WORKSPACE"]}/books") do
       sh "rm '经济/经济学/教材/斯蒂芬·威廉森：宏观经济学 (第3版 扫描版).pdf'" # exceeds GitHub's file size limit of 100.00 MB
       push
     end
 
-    sh "cp -r /home/runner/btsync/blog/blog/* /home/runner/mirrors/blog/"
-    Dir.chdir("/home/runner/mirrors/blog") { push }
+    sh "cp -r /home/runner/btsync/blog/blog/* #{ENV["GITHUB_WORKSPACE"]}/blog/"
+    Dir.chdir("#{ENV["GITHUB_WORKSPACE"]}/blog") { push }
 
-    sh "cp -r /home/runner/btsync/gfw/* /home/runner/mirrors/gfw/"
-    Dir.chdir("/home/runner/mirrors/gfw") { push }
+    sh "cp -r /home/runner/btsync/gfw/* #{ENV["GITHUB_WORKSPACE"]}/gfw/"
+    Dir.chdir("#{ENV["GITHUB_WORKSPACE"]}/gfw") { push }
 
 end
 

@@ -32,19 +32,19 @@ jobs:
         uses: actions/checkout@v2
         with:
           repository: program-think-mirrors/gfw
-          path: /home/runner/mirrors/gfw
+          path: ${{ env.GITHUB_WORKSPACE }}/gfw
           ssh-key: ${{ secrets.SSH_KEY }}
           fetch-depth: 1
       - uses: actions/checkout@v2
         with:
           repository: program-think-mirrors/blog
-          path: /home/runner/mirrors/blog
+          path: ${{ env.GITHUB_WORKSPACE }}/blog
           ssh-key: ${{ secrets.SSH_KEY }}
           fetch-depth: 1
       - uses: actions/checkout@v2
         with:
           repository: program-think-mirrors/books
-          path: /home/runner/mirrors/books
+          path: ${{ env.GITHUB_WORKSPACE }}/books
           ssh-key: ${{ secrets.SSH_KEY }}
           fetch-depth: 1
 
