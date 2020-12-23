@@ -1,3 +1,3 @@
 source "http://production.cf.rubygems.org/"
 
-gem "rake", "~> 10.1.1"
+gem "rake", "~> 13.0.1"

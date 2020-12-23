@@ -1,0 +1,51 @@
+name: Sync
+
+on:
+  workflow_dispatch:
+    inputs: {}
+  schedule:
+    - cron:  0 */3 * * *
+
+jobs:
+  backup:
+
+    runs-on: ubuntu-18.04
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 2.5.3
+          bundler-cache: true
+      - uses: webfactory/ssh-agent@v0.4.1
+        with:
+          ssh-private-key: ${{ secrets.SSH_KEY }}
+
+      - name: Install BT Sync
+        run: |
+          wget https://download-cdn.resilio.com/stable/linux-x64/resilio-sync_x64.tar.gz -O /tmp/btsync.tar.gz
+          cd /tmp/ && tar -xvf /tmp/btsync.tar.gz && cd -
+          sudo cp /tmp/rslsync /usr/local/bin/
+      - name: Install Dependencies
+        run: bundle install
+
+      - name: Set up BT Sync
+        run: |
+          bundle exec rake init --quiet
+          rslsync --config btsync.conf.json
+      
+      - name: Pull
+        run: bundle exec rake pull --quiet &
+      - name: Sync
+        run: |
+          bundle exec rake sync[60] --quiet
+          pkill -f "rslsync"
+      - name: Push to Github
+        run: bundle exec rake deploy --quiet
+
+      - name: Update Date
+        run: |
+          date -u > updated
+          git add updated
+          git commit -m "$(date -uI)"
+          git push

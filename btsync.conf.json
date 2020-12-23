@@ -1,15 +1,15 @@
 {
     "device_name": "BTSync",
     // "listening_port" : 0, // 0 - randomize port
-    "storage_path": "/home/travis/btsync/.sync", // storage_path dir contains auxilliary app files if no storage_path field: .sync dir created in current working directory
-    "pid_file": "/home/travis/btsync/rslsync.pid", // set location of pid file
+    "storage_path": "/home/runner/btsync/.sync", // storage_path dir contains auxilliary app files if no storage_path field: .sync dir created in current working directory
+    "pid_file": "/home/runner/btsync/rslsync.pid", // set location of pid file
     "use_upnp": true, // use UPnP for port mapping
     "download_limit": 0, // limits in kB/s. 0 - no limit
     "upload_limit": 0,
     "shared_folders": [
         {
             "secret": "BRSSYZTSAC6UGYTUOJ22L4GCO7QESPPBD",
-            "dir": "/home/travis/btsync/政治/",
+            "dir": "/home/runner/btsync/政治/",
             "use_relay_server": true,
             "use_tracker": true,
             "search_lan": true,
@@ -19,7 +19,7 @@
         },
         {
             "secret": "BNZ6DOA6W577O6GUNH7C3MY6DWC6FTDQB",
-            "dir": "/home/travis/btsync/心理学/",
+            "dir": "/home/runner/btsync/心理学/",
             "use_relay_server": true,
             "use_tracker": true,
             "search_lan": true,
@@ -29,7 +29,7 @@
         },
         {
             "secret": "BSH7FXJFVWJTKWGSX5GTWX7PHZZ2D2M7Q",
-            "dir": "/home/travis/btsync/历史/",
+            "dir": "/home/runner/btsync/历史/",
             "use_relay_server": true,
             "use_tracker": true,
             "search_lan": true,
@@ -39,7 +39,7 @@
         },
         {
             "secret": "B2FRYA6AXCDW6CF4YJVFWKH2HAXOFICOX",
-            "dir": "/home/travis/btsync/经济/",
+            "dir": "/home/runner/btsync/经济/",
             "use_relay_server": true,
             "use_tracker": true,
             "search_lan": true,
@@ -49,7 +49,7 @@
         },
         {
             "secret": "B3WNBTAAFFAODFR6FQ3E3L5BBSJAFNBSJ",
-            "dir": "/home/travis/btsync/管理/",
+            "dir": "/home/runner/btsync/管理/",
             "use_relay_server": true,
             "use_tracker": true,
             "search_lan": true,
@@ -59,7 +59,7 @@
         },
         {
             "secret": "BZR4TTYHT25QWUIE6YNMAKWUGBHKSGLC6",
-            "dir": "/home/travis/btsync/社会学/",
+            "dir": "/home/runner/btsync/社会学/",
             "use_relay_server": true,
             "use_tracker": true,
             "search_lan": true,
@@ -69,7 +69,7 @@
         },
         {
             "secret": "BMBB5YLBIJJAE5H6TP27OS7YCEUKCYHZK",
-            "dir": "/home/travis/btsync/文艺/",
+            "dir": "/home/runner/btsync/文艺/",
             "use_relay_server": true,
             "use_tracker": true,
             "search_lan": true,
@@ -79,7 +79,17 @@
         },
         {
             "secret": "B6WWVBXPMZDI5IL4KED6AAHA5FO4UNKQF",
-            "dir": "/home/travis/btsync/哲学/",
+            "dir": "/home/runner/btsync/哲学/",
+            "use_relay_server": true,
+            "use_tracker": true,
+            "search_lan": true,
+            "use_sync_trash": true,
+            "overwrite_changes": true,
+            "selective_sync": false
+        },
+        {
+            "secret": "BKKORLE67ZDUHGHVWAVSRK3N5I7BXLCED",
+            "dir": "/home/runner/btsync/科普/",
             "use_relay_server": true,
             "use_tracker": true,
             "search_lan": true,
@@ -89,7 +99,7 @@
         },
         {
             "secret": "BMWWZALG4P56LREF47EE2WSWHZEM4E6BL",
-            "dir": "/home/travis/btsync/军事/",
+            "dir": "/home/runner/btsync/军事/",
             "use_relay_server": true,
             "use_tracker": true,
             "search_lan": true,
@@ -99,7 +109,7 @@
         },
         {
             "secret": "BUPSDXFA3TP7KCMLHALRHLIX2FEJEUJFE",
-            "dir": "/home/travis/btsync/IT/",
+            "dir": "/home/runner/btsync/IT/",
             "use_relay_server": true,
             "use_tracker": true,
             "search_lan": true,
