@@ -1,7 +1,8 @@
 require 'rake'
 require 'date'
 
-BOOK_TYPES = [ "政治", "心理学", "历史", "经济", "管理", "社会学", "文艺", "哲学", "科普", "军事", "IT" ]
+BOOK_TYPES = [ "心理学", "经济", "管理", "社会学", "文艺", "哲学", "科普", "军事", "IT" ]
+# "政治", "历史",
 
 def push
   sh "git pull"
@@ -34,7 +35,7 @@ task :init do
         sh "du -h -s books/#{i}"
 
         sh "mkdir -p /home/runner/btsync/#{i}/#{i}"
-        sh "sudo ln -d books/#{i} /home/runner/btsync/#{i}/#{i}"
+        sh "ln -s -v books/#{i} /home/runner/btsync/#{i}/#{i}"
         sh "ls -al /home/runner/btsync/#{i}"
       end
     end

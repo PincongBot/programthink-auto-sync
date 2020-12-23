@@ -16,12 +16,12 @@ jobs:
         include:
           - { repo: program-think-mirrors/gfw, path: gfw }
           - { repo: program-think-mirrors/blog, path: blog }
-          - { repo: program-think-mirrors/books, path: books, time: 10 }
+          - { repo: program-think-mirrors/books, path: books }
       fail-fast: false
 
     env:
       REPO_PATH: ${{ matrix.path }}
-      WAIT_TIME: ${{ matrix.time || 5 }} # min
+      WAIT_TIME: ${{ matrix.time || 10 }} # min
 
     steps:
       - uses: actions/checkout@v2

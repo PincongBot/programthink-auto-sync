@@ -8,28 +8,8 @@
     "upload_limit": 0,
     "shared_folders": [
         {
-            "secret": "BRSSYZTSAC6UGYTUOJ22L4GCO7QESPPBD",
-            "dir": "/home/runner/btsync/政治/",
-            "use_relay_server": true,
-            "use_tracker": true,
-            "search_lan": true,
-            "use_sync_trash": true,
-            "overwrite_changes": true,
-            "selective_sync": false
-        },
-        {
             "secret": "BNZ6DOA6W577O6GUNH7C3MY6DWC6FTDQB",
             "dir": "/home/runner/btsync/心理学/",
-            "use_relay_server": true,
-            "use_tracker": true,
-            "search_lan": true,
-            "use_sync_trash": true,
-            "overwrite_changes": true,
-            "selective_sync": false
-        },
-        {
-            "secret": "BSH7FXJFVWJTKWGSX5GTWX7PHZZ2D2M7Q",
-            "dir": "/home/runner/btsync/历史/",
             "use_relay_server": true,
             "use_tracker": true,
             "search_lan": true,
