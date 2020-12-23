@@ -116,26 +116,6 @@
             "use_sync_trash": true,
             "overwrite_changes": true,
             "selective_sync": false
-        },
-        {
-            "secret": "B7P64IMWOCXWEYOXIMBX6HN5MHEULFS4V",
-            "dir": "/home/runner/btsync/blog/",
-            "use_relay_server": true,
-            "use_tracker": true,
-            "search_lan": true,
-            "use_sync_trash": true,
-            "overwrite_changes": true,
-            "selective_sync": false
-        },
-        {
-            "secret": "BTLZ4A4UD3PEWKPLLWEOKH3W7OQJKFPLG",
-            "dir": "/home/runner/btsync/gfw/",
-            "use_relay_server": true,
-            "use_tracker": true,
-            "search_lan": true,
-            "use_sync_trash": true,
-            "overwrite_changes": true,
-            "selective_sync": false
         }
     ]
 }

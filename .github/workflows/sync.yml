@@ -11,6 +11,17 @@ jobs:
 
     runs-on: ubuntu-18.04
 
+    strategy:
+      matrix:
+        include:
+          - { repo: program-think-mirrors/gfw, path: gfw }
+          - { repo: program-think-mirrors/blog, path: blog }
+          - { repo: program-think-mirrors/books, path: books }
+      fail-fast: false
+
+    env:
+      REPO_PATH: ${{ matrix.path }}
+
     steps:
       - uses: actions/checkout@v2
         with:
@@ -31,20 +42,8 @@ jobs:
       - name: Pull
         uses: actions/checkout@v2
         with:
-          repository: program-think-mirrors/gfw
-          path: gfw
-          ssh-key: ${{ secrets.SSH_KEY }}
-          fetch-depth: 1
-      - uses: actions/checkout@v2
-        with:
-          repository: program-think-mirrors/blog
-          path: blog
-          ssh-key: ${{ secrets.SSH_KEY }}
-          fetch-depth: 1
-      - uses: actions/checkout@v2
-        with:
-          repository: program-think-mirrors/books
-          path: books
+          repository: ${{ matrix.repo }}
+          path: ${{ matrix.path }}
           ssh-key: ${{ secrets.SSH_KEY }}
           fetch-depth: 1
 
@@ -59,7 +58,7 @@ jobs:
       - name: Set up BT Sync
         run: |
           bundle exec rake init --quiet
-          rslsync --config btsync.conf.json
+          rslsync --config btsync.$REPO_PATH.conf.json
 
       - name: Sync
         run: |

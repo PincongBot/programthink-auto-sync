@@ -28,29 +28,36 @@ task :init do
       sh "mkdir /home/runner/btsync/.sync/"
     end
 
-    BOOK_TYPES.each do |i|
-      sh "mkdir -p books/#{i}"
-      sh "du -h -s books/#{i}"
+    if ENV["REPO_PATH"] == "books" then
+      BOOK_TYPES.each do |i|
+        sh "mkdir -p books/#{i}"
+        sh "du -h -s books/#{i}"
 
-      sh "mkdir -p /home/runner/btsync/#{i}/#{i}"
-      sh "sudo ln -d books/#{i} /home/runner/btsync/#{i}/#{i}"
-      sh "ls -al /home/runner/btsync/#{i}"
+        sh "mkdir -p /home/runner/btsync/#{i}/#{i}"
+        sh "sudo ln -d books/#{i} /home/runner/btsync/#{i}/#{i}"
+        sh "ls -al /home/runner/btsync/#{i}"
+      end
     end
 
 end
 
 task :deploy do
 
-    Dir.chdir("books") do
-      sh "rm '经济/经济学/教材/斯蒂芬·威廉森：宏观经济学 (第3版 扫描版).pdf'" # exceeds GitHub's file size limit of 100.00 MB
-      push
+    case ENV["REPO_PATH"]
+      when "books"
+        Dir.chdir("books") do
+          sh "rm '经济/经济学/教材/斯蒂芬·威廉森：宏观经济学 (第3版 扫描版).pdf'" # exceeds GitHub's file size limit of 100.00 MB
+          push
+        end
+
+      when "blog"
+        sh "cp -r /home/runner/btsync/blog/blog/* blog/"
+        Dir.chdir("blog") { push }
+
+      when "gfw"
+        sh "cp -r /home/runner/btsync/gfw/* gfw/"
+        Dir.chdir("gfw") { push }
     end
-
-    sh "cp -r /home/runner/btsync/blog/blog/* blog/"
-    Dir.chdir("blog") { push }
-
-    sh "cp -r /home/runner/btsync/gfw/* gfw/"
-    Dir.chdir("gfw") { push }
 
 end
 
