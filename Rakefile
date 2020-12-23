@@ -36,7 +36,7 @@ task :init do
           sh "du -L -h -s books/#{i}"
   
           sh "mkdir -p /home/runner/btsync/#{i}"
-          sh "ln -s -v books/#{i} /home/runner/btsync/#{i}/#{i}"
+          sh "ln -s -v #{ENV["GITHUB_WORKSPACE"]}/books/#{i} /home/runner/btsync/#{i}/#{i}"
         end
 
       when "history", "politics"
@@ -47,7 +47,7 @@ task :init do
         i = M[path]
         sh "du -L -h -s #{path}"
         sh "mkdir -p /home/runner/btsync/#{i}"
-        sh "ln -s -v #{path} /home/runner/btsync/#{i}/#{i}"
+        sh "ln -s -v #{ENV["GITHUB_WORKSPACE"]}/#{path} /home/runner/btsync/#{i}/#{i}"
     end
 
 end
