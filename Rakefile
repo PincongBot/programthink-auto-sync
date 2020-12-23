@@ -1,9 +1,6 @@
 require 'rake'
 require 'date'
 
-GIT_NAME = "program-think-mirrors"
-GIT_EMAIL = "program-think-mirrors@github.com"
-
 BOOK_TYPES = [ "政治", "心理学", "历史", "经济", "管理", "社会学", "文艺", "哲学", "科普", "军事", "IT" ]
 
 def push
@@ -30,21 +27,6 @@ task :init do
     unless Dir.exist? "/home/runner/btsync/.sync/"
       sh "mkdir /home/runner/btsync/.sync/"
     end
-
-end
-
-task :pull do
-
-    # Configure git if this is run in CI
-    if ENV["CI"]
-      sh "git config --global user.name '#{GIT_NAME}'"
-      sh "git config --global user.email '#{GIT_EMAIL}'"
-      sh "git config --global push.default simple"
-    end
-
-    sh "git clone --depth=1 git@github.com:program-think-mirrors/gfw.git /home/runner/mirrors/gfw"
-    sh "git clone --depth=1 git@github.com:program-think-mirrors/blog.git /home/runner/mirrors/blog"
-    sh "git clone --depth=1 git@github.com:program-think-mirrors/books.git /home/runner/mirrors/books"
 
 end
 

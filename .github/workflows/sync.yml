@@ -22,10 +22,35 @@ jobs:
       - uses: webfactory/ssh-agent@v0.4.1
         with:
           ssh-private-key: ${{ secrets.SSH_KEY }}
+      - name: Git Config
+        run: |
+          git config --global user.name program-think-mirrors
+          git config --global user.email program-think-mirrors@github.com
+          git config --global push.default simple
+
+      - name: Pull
+        uses: actions/checkout@v2
+        with:
+          repository: program-think-mirrors/gfw
+          path: /home/runner/mirrors/gfw
+          ssh-key: ${{ secrets.SSH_KEY }}
+          fetch-depth: 1
+      - uses: actions/checkout@v2
+        with:
+          repository: program-think-mirrors/blog
+          path: /home/runner/mirrors/blog
+          ssh-key: ${{ secrets.SSH_KEY }}
+          fetch-depth: 1
+      - uses: actions/checkout@v2
+        with:
+          repository: program-think-mirrors/books
+          path: /home/runner/mirrors/books
+          ssh-key: ${{ secrets.SSH_KEY }}
+          fetch-depth: 1
 
       - name: Install BT Sync
         run: |
-          wget https://download-cdn.resilio.com/stable/linux-x64/resilio-sync_x64.tar.gz -O /tmp/btsync.tar.gz
+          wget -nv https://download-cdn.resilio.com/stable/linux-x64/resilio-sync_x64.tar.gz -O /tmp/btsync.tar.gz
           cd /tmp/ && tar -xvf /tmp/btsync.tar.gz && cd -
           sudo cp /tmp/rslsync /usr/local/bin/
       - name: Install Dependencies
@@ -35,9 +60,7 @@ jobs:
         run: |
           bundle exec rake init --quiet
           rslsync --config btsync.conf.json
-      
-      - name: Pull
-        run: bundle exec rake pull --quiet
+
       - name: Sync
         run: |
           bundle exec rake sync[40] --quiet
