@@ -58,7 +58,7 @@ task :deploy do
     case path
       when "books"
         Dir.chdir(path) do
-          sh "rm '经济/经济学/教材/斯蒂芬·威廉森：宏观经济学 (第3版 扫描版).pdf'" # exceeds GitHub's file size limit of 100.00 MB
+          sh "rm '经济/经济学/教材/斯蒂芬·威廉森：宏观经济学 (第3版 扫描版).pdf' || true" # exceeds GitHub's file size limit of 100.00 MB
           push
         end
       
