@@ -63,7 +63,7 @@ jobs:
 
       - name: Sync
         run: |
-          bundle exec rake sync[40] --quiet
+          bundle exec rake sync[10] --quiet
           pkill -f "rslsync"
       - name: Push to Github
         run: bundle exec rake deploy --quiet

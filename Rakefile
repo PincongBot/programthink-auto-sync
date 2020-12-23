@@ -35,6 +35,7 @@ task :init do
       sh "mkdir -p /home/runner/btsync/#{i}/#{i}"
       sh "ln -s books/#{i} /home/runner/btsync/#{i}/#{i}"
       sh "ls -al /home/runner/btsync/#{i}"
+      sh "readlink /home/runner/btsync/#{i}/#{i}"
     end
 
 end
