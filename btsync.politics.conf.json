@@ -8,8 +8,8 @@
     "upload_limit": 0,
     "shared_folders": [
         {
-            "secret": "BSH7FXJFVWJTKWGSX5GTWX7PHZZ2D2M7Q",
-            "dir": "/home/runner/btsync/历史/",
+            "secret": "BRSSYZTSAC6UGYTUOJ22L4GCO7QESPPBD",
+            "dir": "/home/runner/btsync/政治/",
             "use_relay_server": true,
             "use_tracker": true,
             "search_lan": true,
