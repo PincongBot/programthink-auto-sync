@@ -15,8 +15,8 @@ jobs:
       matrix:
         include:
           - { repo: program-think-mirrors/gfw, path: gfw }
-          - { repo: program-think-mirrors/blog, path: blog, time: 10 }
-          - { repo: program-think-mirrors/books, path: books }
+          - { repo: program-think-mirrors/blog, path: blog }
+          - { repo: program-think-mirrors/books, path: books, time: 10 }
       fail-fast: false
 
     env:
