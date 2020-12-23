@@ -68,7 +68,11 @@ jobs:
       - name: Push to Github
         run: bundle exec rake deploy --quiet
 
-      - name: Update Date
+  update-meta:
+    runs-on: ubuntu-18.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: Update Metadata
         run: |
           git pull
           date -u > updated
