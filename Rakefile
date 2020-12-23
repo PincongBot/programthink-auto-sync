@@ -31,10 +31,6 @@ task :init do
       sh "mkdir /home/runner/btsync/.sync/"
     end
 
-    unless Dir.exist? "/home/runner/btsync/blog/"
-      sh "mkdir /home/runner/btsync/blog/"
-    end
-
 end
 
 task :pull do
@@ -46,6 +42,8 @@ task :pull do
       sh "git config --global push.default simple"
     end
 
+    sh "git clone --depth=1 git@github.com:program-think-mirrors/gfw.git /home/runner/mirrors/gfw"
+    sh "git clone --depth=1 git@github.com:program-think-mirrors/blog.git /home/runner/mirrors/blog"
     sh "git clone --depth=1 git@github.com:program-think-mirrors/books.git /home/runner/mirrors/books"
 
 end
@@ -64,6 +62,12 @@ task :deploy do
       sh "rm '经济/经济学/教材/斯蒂芬·威廉森：宏观经济学 (第3版 扫描版).pdf'" # exceeds GitHub's file size limit of 100.00 MB
       push
     end
+
+    sh "cp -r /home/runner/btsync/blog/blog/* /home/runner/mirrors/blog/"
+    Dir.chdir("/home/runner/mirrors/blog") { push }
+
+    sh "cp -r /home/runner/btsync/gfw/* /home/runner/mirrors/gfw/"
+    Dir.chdir("/home/runner/mirrors/gfw") { push }
 
 end
 
