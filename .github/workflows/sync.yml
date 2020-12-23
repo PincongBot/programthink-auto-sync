@@ -37,10 +37,10 @@ jobs:
           rslsync --config btsync.conf.json
       
       - name: Pull
-        run: bundle exec rake pull --quiet &
+        run: bundle exec rake pull --quiet
       - name: Sync
         run: |
-          bundle exec rake sync[60] --quiet
+          bundle exec rake sync[40] --quiet
           pkill -f "rslsync"
       - name: Push to Github
         run: bundle exec rake deploy --quiet
