@@ -73,6 +73,10 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
+      - name: Git Config
+        run: |
+          git config --global user.name program-think-mirrors
+          git config --global user.email program-think-mirrors@github.com
       - name: Update Metadata
         run: |
           git pull
