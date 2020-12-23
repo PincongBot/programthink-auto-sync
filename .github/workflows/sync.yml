@@ -15,12 +15,13 @@ jobs:
       matrix:
         include:
           - { repo: program-think-mirrors/gfw, path: gfw }
-          - { repo: program-think-mirrors/blog, path: blog }
+          - { repo: program-think-mirrors/blog, path: blog, time: 10 }
           - { repo: program-think-mirrors/books, path: books }
       fail-fast: false
 
     env:
       REPO_PATH: ${{ matrix.path }}
+      WAIT_TIME: ${{ matrix.time || 5 }} # min
 
     steps:
       - uses: actions/checkout@v2
@@ -62,7 +63,7 @@ jobs:
 
       - name: Sync
         run: |
-          bundle exec rake sync[10] --quiet
+          bundle exec rake sync[$WAIT_TIME] --quiet
           pkill -f "rslsync"
       - name: Push to Github
         run: bundle exec rake deploy --quiet
