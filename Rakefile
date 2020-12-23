@@ -33,7 +33,7 @@ task :init do
       when "books"
         BOOK_TYPES.each do |i|
           sh "mkdir -p books/#{i}"
-          sh "du -h -s books/#{i}"
+          sh "du -L -h -s books/#{i}"
   
           sh "mkdir -p /home/runner/btsync/#{i}"
           sh "ln -s -v books/#{i} /home/runner/btsync/#{i}/#{i}"
@@ -45,7 +45,7 @@ task :init do
           "politics" => "政治"
         }
         i = M[path]
-        sh "du -h -s #{path}"
+        sh "du -L -h -s #{path}"
         sh "mkdir -p /home/runner/btsync/#{i}"
         sh "ln -s -v #{path} /home/runner/btsync/#{i}/#{i}"
     end
@@ -90,7 +90,7 @@ task :sync, [:minutes] do |t, args|
 
       if i % 30 == 0 then
         puts ""
-        sh "du -h -s /home/runner/btsync/*"
+        sh "du -L -h -s /home/runner/btsync/*"
       end
 
       sleep(1)
