@@ -29,8 +29,12 @@ task :init do
     end
 
     BOOK_TYPES.each do |i|
+      sh "mkdir -p books/#{i}"
+      sh "du -h -s books/#{i}"
+
       sh "mkdir -p /home/runner/btsync/#{i}/#{i}"
       sh "ln -s books/#{i} /home/runner/btsync/#{i}/#{i}"
+      sh "ls -al /home/runner/btsync/#{i}"
     end
 
 end
