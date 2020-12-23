@@ -17,6 +17,8 @@ jobs:
           - { repo: program-think-mirrors/gfw, path: gfw }
           - { repo: program-think-mirrors/blog, path: blog }
           - { repo: program-think-mirrors/books, path: books }
+          - { repo: program-think-mirrors/books, path: history, ref: history }
+          - { repo: program-think-mirrors/books, path: politics, ref: politics }
       fail-fast: false
 
     env:
@@ -39,6 +41,7 @@ jobs:
           git config --global user.name program-think-mirrors
           git config --global user.email program-think-mirrors@github.com
           git config --global push.default simple
+          git config --global pull.ff only 
 
       - name: Pull
         uses: actions/checkout@v2

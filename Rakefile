@@ -2,7 +2,6 @@ require 'rake'
 require 'date'
 
 BOOK_TYPES = [ "心理学", "经济", "管理", "社会学", "文艺", "哲学", "科普", "军事", "IT" ]
-# "政治", "历史",
 
 def push
   sh "git pull"
@@ -29,35 +28,50 @@ task :init do
       sh "mkdir /home/runner/btsync/.sync/"
     end
 
-    if ENV["REPO_PATH"] == "books" then
-      BOOK_TYPES.each do |i|
-        sh "mkdir -p books/#{i}"
-        sh "du -h -s books/#{i}"
+    path = ENV["REPO_PATH"]
+    case path
+      when "books"
+        BOOK_TYPES.each do |i|
+          sh "mkdir -p books/#{i}"
+          sh "du -h -s books/#{i}"
+  
+          sh "mkdir -p /home/runner/btsync/#{i}"
+          sh "ln -s -v books/#{i} /home/runner/btsync/#{i}/#{i}"
+        end
 
-        sh "mkdir -p /home/runner/btsync/#{i}/#{i}"
-        sh "ln -s -v books/#{i} /home/runner/btsync/#{i}/#{i}"
-        sh "ls -al /home/runner/btsync/#{i}"
-      end
+      when "history", "politics"
+        M = {
+          "history"  => "历史",
+          "politics" => "政治"
+        }
+        i = M[path]
+        sh "du -h -s #{path}"
+        sh "mkdir -p /home/runner/btsync/#{i}"
+        sh "ln -s -v #{path} /home/runner/btsync/#{i}/#{i}"
     end
 
 end
 
 task :deploy do
 
-    case ENV["REPO_PATH"]
+    path = ENV["REPO_PATH"]
+    case path
       when "books"
-        Dir.chdir("books") do
+        Dir.chdir(path) do
           sh "rm '经济/经济学/教材/斯蒂芬·威廉森：宏观经济学 (第3版 扫描版).pdf'" # exceeds GitHub's file size limit of 100.00 MB
           push
         end
+      
+      when "history", "politics"
+        Dir.chdir(path) { push }
 
       when "blog"
         sh "cp -r /home/runner/btsync/blog/blog/* blog/"
-        Dir.chdir("blog") { push }
+        Dir.chdir(path) { push }
 
       when "gfw"
         sh "cp -r /home/runner/btsync/gfw/* gfw/"
-        Dir.chdir("gfw") { push }
+        Dir.chdir(path) { push }
     end
 
 end
