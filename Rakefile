@@ -28,18 +28,15 @@ task :init do
       sh "mkdir /home/runner/btsync/.sync/"
     end
 
+    BOOK_TYPES.each do |i|
+      sh "mkdir -p /home/runner/btsync/#{i}/#{i}"
+      sh "ln -s books/#{i} /home/runner/btsync/#{i}/#{i}"
+    end
+
 end
 
 task :deploy do
 
-    BOOK_TYPES.each do |i|
-      if Dir.exist? "/home/runner/btsync/#{i}"
-        sh "rm -rf books/#{i}"
-        sh "cp -r /home/runner/btsync/#{i}/#{i} books/"
-      end
-    end
-    puts "files copied"
-    
     Dir.chdir("books") do
       sh "rm '经济/经济学/教材/斯蒂芬·威廉森：宏观经济学 (第3版 扫描版).pdf'" # exceeds GitHub's file size limit of 100.00 MB
       push
