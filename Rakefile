@@ -18,6 +18,12 @@ def push
   puts "Pushed updated branch master"
 end
 
+def mount(path, i)
+  sh "du -L -h -s #{path}"
+  sh "mkdir -p /home/runner/btsync/#{i}/#{i}"
+  sh "sudo mount --bind -v #{ENV["GITHUB_WORKSPACE"]}/#{path} /home/runner/btsync/#{i}/#{i}"
+end
+
 task :init do
 
     unless Dir.exist? "/home/runner/btsync/"
@@ -34,10 +40,7 @@ task :init do
         BOOK_TYPES.each do |i|
           path = "books/#{i}"
           sh "mkdir -p #{path}"
-
-          sh "du -L -h -s #{path}"
-          sh "mkdir -p /home/runner/btsync/#{i}"
-          sh "sudo mount --bind -v #{ENV["GITHUB_WORKSPACE"]}/#{path} /home/runner/btsync/#{i}/#{i}"
+          mount(path, i)
         end
 
       when "history", "politics"
@@ -46,9 +49,7 @@ task :init do
           "politics" => "政治"
         }
         i = M[path]
-        sh "du -L -h -s #{path}"
-        sh "mkdir -p /home/runner/btsync/#{i}"
-        sh "sudo mount --bind -v #{ENV["GITHUB_WORKSPACE"]}/#{path} /home/runner/btsync/#{i}/#{i}"
+        mount(path, i)
     end
 
 end
