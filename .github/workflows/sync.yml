@@ -43,7 +43,7 @@ jobs:
       - name: Pull
         uses: actions/checkout@v2
         with:
-          ref: ${{ matrix.ref || "master" }}
+          ref: master
           repository: ${{ matrix.repo }}
           path: ${{ matrix.path }}
           ssh-key: ${{ secrets.SSH_KEY }}
