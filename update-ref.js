@@ -48,6 +48,10 @@ module.exports = async ({ github }) => {
         ]
     })
 
+    if (resultTree === baseTree) {
+        return
+    }
+
     const { data: { sha: resultCommit } } = await github.git.createCommit({
         owner,
         repo,
