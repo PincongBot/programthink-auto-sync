@@ -9,8 +9,8 @@ def push
   Dir.glob("*") do |subdir|
     sh "git add --all #{subdir}"
 
-    files_changed = `git status --short | wc -l`.match(/\d+/)[0].to_i
-    
+    files_changed = `git diff --name-only --cached | wc -l`.match(/\d+/)[0].to_i
+
     if files_changed > 0
       date = DateTime.now.strftime("%F")
       sh "git commit -m '#{date}'"
