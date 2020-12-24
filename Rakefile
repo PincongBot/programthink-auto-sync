@@ -6,8 +6,6 @@ BOOK_TYPES = [ "心理学", "经济", "管理", "社会学", "文艺", "哲学",
 def push
   ref = ENV["REPO_REF"]
 
-  sh "git pull"
-
   Dir.glob("*") do |subdir|
     sh "git add --all #{subdir}"
 
