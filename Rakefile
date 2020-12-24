@@ -1,23 +1,29 @@
 require 'rake'
 require 'date'
+require 'shellwords'
 
 BOOK_TYPES = [ "心理学", "经济", "管理", "社会学", "文艺", "哲学", "科普", "军事", "IT" ]
+
+def push_dir(subdir)
+  sh "git add --all #{Shellwords.escape(subdir)}"
+
+  files_changed = `git diff --name-only --cached | wc -l`.match(/\d+/)[0].to_i
+
+  if files_changed > 0
+    date = DateTime.now.strftime("%F")
+    sh "git commit -m '#{date}'"
+  end
+
+  sh "git push origin #{ref}"
+end
 
 def push
   ref = ENV["REPO_REF"]
 
   Dir.glob("*") do |subdir|
-    sh "git add --all #{subdir}"
-
-    files_changed = `git diff --name-only --cached | wc -l`.match(/\d+/)[0].to_i
-
-    if files_changed > 0
-      date = DateTime.now.strftime("%F")
-      sh "git commit -m '#{date}'"
-    end
-
-    sh "git push origin #{ref}"
+    push_dir(subdir)
   end
+  push_dir(".")
 
   puts "Pushed updated branch #{ref}"
 end
