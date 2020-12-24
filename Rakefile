@@ -20,9 +20,9 @@ end
 def push
   ref = ENV["REPO_REF"]
 
-  Dir.glob("*") do |subdir|
-    push_dir(subdir, ref)
-  end
+  # Dir.glob("*") do |subdir|
+  #   push_dir(subdir, ref)
+  # end
   push_dir(".", ref)
 
   puts "Pushed updated branch #{ref}"
@@ -71,9 +71,10 @@ task :deploy do
       when "books"
         Dir.chdir(path) do
           sh "rm '经济/经济学/教材/斯蒂芬·威廉森：宏观经济学 (第3版 扫描版).pdf' || true" # exceeds GitHub's file size limit of 100.00 MB
-          BOOK_TYPES.each do |i|
-            Dir.chdir(i) { push }
-          end
+          # BOOK_TYPES.each do |i|
+          #   Dir.chdir(i) { push }
+          # end
+          push
         end
 
       when "history", "politics"
