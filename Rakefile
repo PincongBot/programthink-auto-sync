@@ -5,16 +5,20 @@ BOOK_TYPES = [ "心理学", "经济", "管理", "社会学", "文艺", "哲学",
 
 def push
   sh "git pull"
-  sh "git add --all ."
-  
-  files_changed = `git status --short | wc -l`.match(/\d+/)[0].to_i
-  
-  if files_changed > 0
-    date = DateTime.now.strftime("%F")
-    sh "git commit -m '#{date}'"
+
+  Dir.glob("*") do |subdir|
+    sh "git add --all #{subdir}"
+
+    files_changed = `git status --short | wc -l`.match(/\d+/)[0].to_i
+    
+    if files_changed > 0
+      date = DateTime.now.strftime("%F")
+      sh "git commit -m '#{date}'"
+    end
+
+    sh "git push origin master"
   end
 
-  sh "git push --quiet origin master"
   puts "Pushed updated branch master"
 end
 
@@ -61,9 +65,11 @@ task :deploy do
       when "books"
         Dir.chdir(path) do
           sh "rm '经济/经济学/教材/斯蒂芬·威廉森：宏观经济学 (第3版 扫描版).pdf' || true" # exceeds GitHub's file size limit of 100.00 MB
-          push
+          BOOK_TYPES.each do |i|
+            Dir.chdir(i) { push }
+          end
         end
-      
+
       when "history", "politics"
         Dir.chdir(path) { push }
 
