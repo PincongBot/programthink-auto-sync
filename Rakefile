@@ -4,6 +4,8 @@ require 'date'
 BOOK_TYPES = [ "心理学", "经济", "管理", "社会学", "文艺", "哲学", "科普", "军事", "IT" ]
 
 def push
+  ref = ENV["REPO_REF"]
+
   sh "git pull"
 
   Dir.glob("*") do |subdir|
@@ -16,10 +18,10 @@ def push
       sh "git commit -m '#{date}'"
     end
 
-    sh "git push origin master"
+    sh "git push origin #{ref}"
   end
 
-  puts "Pushed updated branch master"
+  puts "Pushed updated branch #{ref}"
 end
 
 def mount(path, i)

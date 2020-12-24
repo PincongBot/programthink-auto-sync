@@ -22,6 +22,7 @@ jobs:
       fail-fast: false
 
     env:
+      REPO_REF: ${{ matrix.ref || 'master' }}
       REPO_PATH: ${{ matrix.path }}
       WAIT_TIME: ${{ matrix.time || 10 }} # min
 
@@ -46,7 +47,7 @@ jobs:
       - name: Pull
         uses: actions/checkout@v2
         with:
-          ref: ${{ matrix.ref || 'master' }}
+          ref: ${{ env.REPO_REF }}
           repository: ${{ matrix.repo }}
           path: ${{ matrix.path }}
           ssh-key: ${{ secrets.SSH_KEY }}
