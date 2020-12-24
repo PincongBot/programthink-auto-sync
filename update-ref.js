@@ -20,10 +20,13 @@ async function readCommit(ref, github) {
     }
 }
 
+/**
+ * @param {{ github: import('@octokit/rest').Octokit }} options 
+ */
 module.exports = async ({ github }) => {
     const { treeSha: baseTree, commitId: baseCommit } = await readCommit("master", github)
-    const { treeSha: history } = await readCommit("history", github)
-    const { treeSha: politics } = await readCommit("politics", github)
+    const { commitId: history } = await readCommit("history", github)
+    const { commitId: politics } = await readCommit("politics", github)
 
     const { data: { sha: resultTree } } = await github.git.createTree({
         owner,
@@ -32,14 +35,14 @@ module.exports = async ({ github }) => {
         tree: [
             {
                 path: "历史",
-                mode: "040000",
-                type: "tree",
+                mode: "160000",
+                type: "commit",
                 sha: history,
             },
             {
                 path: "政治",
-                mode: "040000",
-                type: "tree",
+                mode: "160000",
+                type: "commit",
                 sha: politics,
             },
         ]
