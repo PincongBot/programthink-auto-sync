@@ -24,7 +24,7 @@ jobs:
     env:
       REPO_REF: ${{ matrix.ref || 'master' }}
       REPO_PATH: ${{ matrix.path }}
-      WAIT_TIME: ${{ matrix.time || 10 }} # min
+      WAIT_TIME: ${{ matrix.time || 30 }} # min
 
     steps:
       - uses: actions/checkout@v2
