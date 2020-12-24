@@ -4,7 +4,7 @@ require 'shellwords'
 
 BOOK_TYPES = [ "心理学", "经济", "管理", "社会学", "文艺", "哲学", "科普", "军事", "IT" ]
 
-def push_dir(subdir)
+def push_dir(subdir, ref)
   sh "git add --all #{Shellwords.escape(subdir)}"
 
   files_changed = `git diff --name-only --cached | wc -l`.match(/\d+/)[0].to_i
@@ -21,9 +21,9 @@ def push
   ref = ENV["REPO_REF"]
 
   Dir.glob("*") do |subdir|
-    push_dir(subdir)
+    push_dir(subdir, ref)
   end
-  push_dir(".")
+  push_dir(".", ref)
 
   puts "Pushed updated branch #{ref}"
 end
