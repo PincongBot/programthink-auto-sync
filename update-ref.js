@@ -27,6 +27,7 @@ module.exports = async ({ github }) => {
     const { treeSha: baseTree, commitId: baseCommit } = await readCommit("master", github)
     const { commitId: history } = await readCommit("history", github)
     const { commitId: politics } = await readCommit("politics", github)
+    const { commitId: military } = await readCommit("military", github)
 
     const { data: { sha: resultTree } } = await github.git.createTree({
         owner,
@@ -44,6 +45,12 @@ module.exports = async ({ github }) => {
                 mode: "160000",
                 type: "commit",
                 sha: politics,
+            },
+            {
+                path: "军事",
+                mode: "160000",
+                type: "commit",
+                sha: military,
             },
         ]
     })

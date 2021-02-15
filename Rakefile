@@ -2,7 +2,7 @@ require 'rake'
 require 'date'
 require 'shellwords'
 
-BOOK_TYPES = [ "心理学", "经济", "管理", "社会学", "文艺", "哲学", "科普", "军事", "IT" ]
+BOOK_TYPES = [ "心理学", "经济", "管理", "社会学", "文艺", "哲学", "科普", "IT" ]
 
 def push_dir(subdir, ref)
   sh "git add --all #{Shellwords.escape(subdir)}"
@@ -53,10 +53,11 @@ task :init do
           mount(path, i)
         end
 
-      when "history", "politics"
+      when "history", "politics", "military"
         M = {
           "history"  => "历史",
-          "politics" => "政治"
+          "politics" => "政治",
+          "military" => "军事",
         }
         i = M[path]
         mount(path, i)
@@ -77,7 +78,7 @@ task :deploy do
           push
         end
 
-      when "history", "politics"
+      when "history", "politics", "military"
         Dir.chdir(path) { push }
 
       when "blog"

@@ -19,6 +19,7 @@ jobs:
           - { repo: program-think-mirrors/books, path: books }
           - { repo: program-think-mirrors/books, path: history, ref: history }
           - { repo: program-think-mirrors/books, path: politics, ref: politics }
+          - { repo: program-think-mirrors/books, path: military, ref: military }
       fail-fast: false
 
     env:
